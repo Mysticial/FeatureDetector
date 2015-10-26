@@ -78,11 +78,11 @@ public:
     void print() const;
     static void print_host();
 
-    static void cpuid(int32_t out[4],int32_t x);
+    static void cpuid(int32_t out[4], int32_t x);
     static std::string get_vendor_string();
 
 private:
-    static void print(const char* label,bool yes);
+    static void print(const char* label, bool yes);
 
     static bool detect_OS_x64();
     static bool detect_OS_AVX();

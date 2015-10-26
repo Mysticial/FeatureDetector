@@ -19,8 +19,8 @@ namespace FeatureDetector{
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-void cpu_x86::cpuid(int32_t out[4],int32_t x){
-    __cpuidex(out,x,0);
+void cpu_x86::cpuid(int32_t out[4], int32_t x){
+    __cpuidex(out, x, 0);
 }
 __int64 xgetbv(unsigned int x){
     return _xgetbv(x);
@@ -34,11 +34,11 @@ BOOL IsWow64()
     BOOL bIsWow64 = FALSE;
 
     LPFN_ISWOW64PROCESS fnIsWow64Process = (LPFN_ISWOW64PROCESS) GetProcAddress(
-        GetModuleHandle(TEXT("kernel32")),"IsWow64Process");
+        GetModuleHandle(TEXT("kernel32")), "IsWow64Process");
 
     if (NULL != fnIsWow64Process)
     {
-        if (!fnIsWow64Process(GetCurrentProcess(),&bIsWow64))
+        if (!fnIsWow64Process(GetCurrentProcess(), &bIsWow64))
         {
             printf("Error Detecting Operating System.\n");
             printf("Defaulting to 32-bit OS.\n\n");
