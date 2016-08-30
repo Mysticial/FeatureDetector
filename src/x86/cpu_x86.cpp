@@ -17,13 +17,18 @@
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-#if _WIN32
-#include "cpu_x86_Windows.ipp"
-#elif (defined __linux) && (defined __GNUC__)
-#include "cpu_x86_Linux.ipp"
+#if defined(__x86_64__) || defined(_M_X64) || defined(__i386) || defined(_M_IX86)
+#   if _WIN32
+#       include "cpu_x86_Windows.ipp"
+#   elif defined(__GNUC__) || defined(__clang__)
+#       include "cpu_x86_Linux.ipp"
+#   else
+#       error "No cpuid intrinsic defined for compiler."
+#   endif
 #else
-#error "No cpuid intrinsic defined."
+#   error "No cpuid intrinsic defined for processor architecture."
 #endif
+
 namespace FeatureDetector{
     using std::cout;
     using std::endl;
