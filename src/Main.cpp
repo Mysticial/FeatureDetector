@@ -20,6 +20,8 @@ int main(){
 
     cpu_x86::print_host();
 
+    cpu_x86::print_warnings();
+
 #if _WIN32
     system("pause");
 #endif

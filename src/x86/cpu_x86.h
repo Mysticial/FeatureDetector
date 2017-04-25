@@ -9,6 +9,20 @@
 #pragma once
 #ifndef _cpu_x86_H
 #define _cpu_x86_H
+
+
+
+// Making Windows work for SSE defines
+// https://msdn.microsoft.com/en-us/library/b0084kay.aspx
+#ifdef _M_IX86_FP
+#if _M_IX86_FP < 0
+#define __SSE__ 1
+#endif
+#if _M_IX86_FP < 1
+#define __SSE2__ 1
+#endif
+#endif
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -71,15 +85,38 @@ struct cpu_x86{
     bool HW_AVX512_IFMA;
     bool HW_AVX512_VBMI;
 
+
+    // Compiler defines
+    bool COMP_AVX;
+    bool COMP_AVX2;
+    bool COMP_AVX512BW;
+    bool COMP_AVX512CD;
+    bool COMP_AVX512DQ;
+    bool COMP_AVX512F;
+    bool COMP_AVX512VL;
+    bool COMP_SSE;
+    bool COMP_SSE2;
+    bool COMP_SSE2_MATH;
+    bool COMP_SSE3;
+    bool COMP_SSE4;
+    bool COMP_SSE41;
+    bool COMP_SSE42;
+    bool COMP_SSE_MATH;
+    bool COMP_SSSE3;
+
 public:
     cpu_x86();
     void detect_host();
+    void detect_compiler();
 
     void print() const;
     static void print_host();
+    static void print_warnings();
 
     static void cpuid(int32_t out[4], int32_t x);
     static std::string get_vendor_string();
+
+    std::string warn_compiler() const;
 
 private:
     static void print(const char* label, bool yes);
@@ -88,6 +125,77 @@ private:
     static bool detect_OS_AVX();
     static bool detect_OS_AVX512();
 };
+
+// Because this is in the header, a linking program
+// will correctly pick up the current features.
+inline void cpu_x86::detect_compiler() {
+
+#ifdef __AVX__ 
+    COMP_AVX = true;
+#endif
+
+#ifdef __AVX2__
+    COMP_AVX2 = true;
+#endif
+
+#ifdef __AVX512BW__
+    COMP_AVX512BW = true;
+#endif
+
+#ifdef __AVX512CD__
+    COMP_AVX512CD = true;
+#endif
+
+#ifdef __AVX512DQ__
+    COMP_AVX512DQ = true;
+#endif
+
+#ifdef __AVX512F__
+    COMP_AVX512F = true;
+#endif
+
+#ifdef __AVX512VL__
+    COMP_AVX512VL = true;
+#endif
+
+#ifdef __SSE__
+    COMP_SSE = true;
+#endif
+
+#ifdef __SSE2__
+    COMP_SSE2 = true;
+#endif
+
+#ifdef __SSE2_MATH___
+    COMP_SSE2_MATH = true;
+#endif
+
+#ifdef __SSE3__
+    COMP_SSE3 = true;
+#endif
+
+#ifdef __SSE4__
+    COMP_SSE4 = true;
+#endif
+
+#ifdef __SSE4_1__
+    COMP_SSE41 = true;
+#endif
+
+#ifdef __SSE4_2__
+    COMP_SSE42 = true;
+#endif
+
+#ifdef __SSE_MATH__
+    COMP_SSE_MATH = true;
+#endif
+
+#ifdef __SSSE3__
+    COMP_SSSE3 = true;
+#endif
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////

@@ -224,6 +224,44 @@ void cpu_x86::print() const{
     print("    Safe to use AVX512:  ", HW_AVX512_F && OS_AVX512);
     cout << endl;
 }
+
+// Only available in this compilation unit
+std::string _make_warning(std::string name) {
+    return "Warning: " + name + " supported but not enabled during compilation\n";
+}
+
+std::string cpu_x86::warn_compiler() const {
+    std::string output;
+    if(!COMP_SSE && HW_SSE)
+        output += _make_warning("SSE");
+    if(!COMP_SSE2 && HW_SSE2)
+        output += _make_warning("SSE2");
+    if(!COMP_SSE3 && HW_SSE3)
+        output += _make_warning("SSE3");
+    if(!COMP_SSE4 && HW_SSE4a)
+        output += _make_warning("SSE4");
+    if(!COMP_SSE41 && HW_SSE41)
+        output += _make_warning("SSE4.1");
+    if(!COMP_SSE42 && HW_SSE42)
+        output += _make_warning("SSE4.2");
+    if(!COMP_AVX && OS_AVX && HW_AVX)
+        output += _make_warning("AVX");
+    if(!COMP_AVX2 && HW_AVX2)
+        output += _make_warning("AVX2");
+    if(!COMP_AVX512F && OS_AVX512 && HW_AVX512_F)
+        output += _make_warning("AVX512");
+
+    return output;
+}
+
+void cpu_x86::print_warnings() {
+
+    cpu_x86 features;
+    features.detect_host();
+    features.detect_compiler();
+    std::cout << features.warn_compiler() << std::flush;
+}
+
 void cpu_x86::print_host(){
     cpu_x86 features;
     features.detect_host();
