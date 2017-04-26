@@ -248,7 +248,7 @@ std::string cpu_x86::warn_compiler() const {
         output += _make_warning("AVX");
     if(!COMP_AVX2 && HW_AVX2)
         output += _make_warning("AVX2");
-    if(!COMP_AVX512F && OS_AVX512 && HW_AVX512_F)
+    if(!COMP_AVX512_F && OS_AVX512 && HW_AVX512_F)
         output += _make_warning("AVX512");
 
     return output;
