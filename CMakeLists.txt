@@ -3,4 +3,5 @@ project(FeatureDetector CXX)
 
 add_subdirectory(src/x86)
 add_executable(FeatureDetector_main src/Main.cpp)
-target_link_libraries(FeatureDetector_main FeatureDetector)
+target_include_directories(FeatureDetector PUBLIC src)
+target_link_libraries(FeatureDetector_main PUBLIC FeatureDetector)
