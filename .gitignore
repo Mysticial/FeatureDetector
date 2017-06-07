@@ -1,3 +1,9 @@
 .sconsign.dblite
 *.o
+*.a
 bin/
+build/
+CMakeFiles
+Makefile
+cmake_install.cmake
+FeatureDetector_main
