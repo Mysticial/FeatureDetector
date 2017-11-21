@@ -7,3 +7,7 @@ CMakeFiles
 Makefile
 cmake_install.cmake
 FeatureDetector_main
+Debug/
+Release/
+FeatureDetector.VC*
+.vs/
