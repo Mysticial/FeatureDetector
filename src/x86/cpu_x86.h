@@ -36,11 +36,14 @@ struct cpu_x86{
     bool HW_x64;
     bool HW_ABM;
     bool HW_RDRAND;
+    bool HW_RDSEED;
     bool HW_BMI1;
     bool HW_BMI2;
     bool HW_ADX;
-    bool HW_PREFETCHWT1;
     bool HW_MPX;
+    bool HW_PREFETCHW;
+    bool HW_PREFETCHWT1;
+    bool HW_RDPID;
 
     //  SIMD: 128-bit
     bool HW_SSE;
@@ -62,14 +65,38 @@ struct cpu_x86{
 
     //  SIMD: 512-bit
     bool HW_AVX512_F;
+    bool HW_AVX512_CD;
+
+    //  Knights Landing
     bool HW_AVX512_PF;
     bool HW_AVX512_ER;
-    bool HW_AVX512_CD;
+
+    //  Skylake Purley
     bool HW_AVX512_VL;
     bool HW_AVX512_BW;
     bool HW_AVX512_DQ;
+
+    //  Cannon Lake
     bool HW_AVX512_IFMA;
     bool HW_AVX512_VBMI;
+
+    //  Knights Mill
+    bool HW_AVX512_VPOPCNTDQ;
+    bool HW_AVX512_4FMAPS;
+    bool HW_AVX512_4VNNIW;
+
+    //  Cascade Lake
+    bool HW_AVX512_VNNI;
+
+    //  Cooper Lake
+    bool HW_AVX512_BF16;
+
+    //  Ice Lake
+    bool HW_AVX512_VBMI2;
+    bool HW_GFNI;
+    bool HW_VAES;
+    bool HW_AVX512_VPCLMUL;
+    bool HW_AVX512_BITALG;
 
 public:
     cpu_x86();
@@ -78,7 +105,7 @@ public:
     void print() const;
     static void print_host();
 
-    static void cpuid(int32_t out[4], int32_t x);
+    static void cpuid(int32_t out[4], int32_t eax, int32_t ecx);
     static std::string get_vendor_string();
 
 private:
