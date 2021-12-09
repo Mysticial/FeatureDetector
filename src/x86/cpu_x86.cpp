@@ -179,6 +179,7 @@ void cpu_x86::detect_host(){
         HW_SSE4a = (info[2] & ((int)1 <<  6)) != 0;
         HW_FMA4  = (info[2] & ((int)1 << 16)) != 0;
         HW_XOP   = (info[2] & ((int)1 << 11)) != 0;
+        HW_PREFETCHW = (info[2] & ((int)1 << 8)) != 0;
     }
 }
 void cpu_x86::print() const{
