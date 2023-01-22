@@ -157,8 +157,8 @@ void cpu_x86::detect_host(){
         HW_AVX512_VBMI  = (info[2] & ((int)1 <<  1)) != 0;
 
         HW_AVX512_VPOPCNTDQ = (info[2] & ((int)1 << 14)) != 0;
-        HW_AVX512_4FMAPS    = (info[3] & ((int)1 <<  2)) != 0;
-        HW_AVX512_4VNNIW    = (info[3] & ((int)1 <<  3)) != 0;
+        HW_AVX512_4VNNIW    = (info[3] & ((int)1 <<  2)) != 0;
+        HW_AVX512_4FMAPS    = (info[3] & ((int)1 <<  3)) != 0;
 
         HW_AVX512_VNNI      = (info[2] & ((int)1 << 11)) != 0;
 
@@ -244,8 +244,8 @@ void cpu_x86::print() const{
     print("    AVX512-IFMA      = ", HW_AVX512_IFMA);
     print("    AVX512-VBMI      = ", HW_AVX512_VBMI);
     print("    AVX512-VPOPCNTDQ = ", HW_AVX512_VPOPCNTDQ);
-    print("    AVX512-4FMAPS    = ", HW_AVX512_4FMAPS);
     print("    AVX512-4VNNIW    = ", HW_AVX512_4VNNIW);
+    print("    AVX512-4FMAPS    = ", HW_AVX512_4FMAPS);
     print("    AVX512-VBMI2     = ", HW_AVX512_VBMI2);
     print("    AVX512-VPCLMUL   = ", HW_AVX512_VPCLMUL);
     print("    AVX512-VNNI      = ", HW_AVX512_VNNI);

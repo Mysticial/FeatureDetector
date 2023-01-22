@@ -82,8 +82,8 @@ struct cpu_x86{
 
     //  Knights Mill
     bool HW_AVX512_VPOPCNTDQ;
-    bool HW_AVX512_4FMAPS;
     bool HW_AVX512_4VNNIW;
+    bool HW_AVX512_4FMAPS;
 
     //  Cascade Lake
     bool HW_AVX512_VNNI;
