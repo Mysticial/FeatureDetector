@@ -55,7 +55,7 @@ bool cpu_x86::detect_OS_AVX(){
 
     bool avxSupported = false;
 
-    int cpuInfo[4];
+    int32_t cpuInfo[4];
     cpuid(cpuInfo, 1, 0);
 
     bool osUsesXSAVE_XRSTORE = (cpuInfo[2] & (1 << 27)) != 0;
@@ -106,7 +106,7 @@ void cpu_x86::detect_host(){
         Vendor_AMD = true;
     }
 
-    int info[4];
+    int32_t info[4];
     cpuid(info, 0, 0);
     int nIds = info[0];
 
