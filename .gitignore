@@ -11,3 +11,7 @@ Debug/
 Release/
 FeatureDetector.VC*
 .vs/
+/Linux
+/Windows
+/.vs
+/.idea
